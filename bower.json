@@ -1,0 +1,28 @@
+{
+  "name": "ng-couch-potato",
+  "version": "0.0.5",
+  "main": [
+    "dist/ng-couch-potato.min.js"
+  ],
+  "description": "Provider to Lazy-Load Components in AngularJS Applications",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stu-salsbury/ng-couch-potato.git"
+  },
+  "ignore": [
+    "samples",
+    "src",
+    "*.js",
+    "*.jshintrc",
+    "*.gitignore",
+    "package.json"
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+    "angular": "angular-unstable@1.2.x",
+    "angular-route": "angular-route@1.2.x",
+    "requirejs": "~2.1.8",
+    "angular-ui-router": "angular-ui/ui-router"
+  }
+}
