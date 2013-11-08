@@ -13,9 +13,9 @@
     "dist/docs",
     "docs",
     "src",
-    "*.js",
-    "*.jshintrc",
-    "*.gitignore",
+    "./*.js",
+    "./*.jshintrc",
+    "./*.gitignore",
     "package.json"
   ],
   "dependencies": {
