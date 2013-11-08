@@ -26,6 +26,7 @@
     "grunt-contrib-clean": "~0.4.0",
     "grunt-ngdocs": "m7r/grunt-ngdocs",
     "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-concat": "~0.3.0"
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-gh-pages": "~0.8.1"
   }
 }

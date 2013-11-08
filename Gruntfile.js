@@ -10,6 +10,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-ngdocs');
+  grunt.loadNpmTasks('grunt-gh-pages');
 
   // grunt.registerTask('bower', ['bowerTask', 'gruntBower']);
   grunt.registerTask('bower', ['bowerTask', 'gruntBower']);
@@ -30,6 +31,12 @@ module.exports = function(grunt) {
       src: {
         js: ['src/**/couchPotato.js']
       }
+    },
+    'gh-pages': {
+      options: {
+        base: 'dist'
+      },
+      src: ['**']
     },
     pkg: grunt.file.readJSON('package.json'),
     banner:
