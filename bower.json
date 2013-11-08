@@ -2,7 +2,6 @@
   "name": "angular-couch-potato",
   "version": "0.1.0",
   "main": [
-    "dist/angular-couch-potato.min.js",
     "dist/angular-couch-potato.js"
   ],
   "description": "Provider/Service to Lazy-Load Components in AngularJS Applications",
