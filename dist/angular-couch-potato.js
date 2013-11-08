@@ -239,8 +239,8 @@
         svc.registerDecorator = registerDecorator;
         svc.registerProvider = registerProvider;
 
-        // svc.resolveDependenciesProperty = resolveDependenciesProperty;
-        // svc.resolveDependencies = resolveDependencies;
+        svc.resolveDependenciesProperty = resolveDependenciesProperty;
+        svc.resolveDependencies = resolveDependencies;
         svc.resolve = resolve;
 
         return svc;
