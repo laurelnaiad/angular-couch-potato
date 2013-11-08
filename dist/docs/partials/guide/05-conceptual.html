@@ -1,0 +1,37 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h2 id="couchpotatoconceptualoverview">Couch Potato: Conceptual Overview</h3>
+
+<p>In a traditional AngularJS application, you define and configure all components
+before the application runs.  The seperation between "configuration time" and
+"run time", along with the dependency injection system, enables the programmer
+to define all components <em>in any order</em> and to know that they will all be
+configured prior to any of them being run.  This might sound like a truism!</p>
+
+<p>There may be application where defining and configuring every component that the
+application will use is not optimal.  A few reasons to delay are:</p>
+
+<ul>
+<li>there are a very large number of components split up among many states</li>
+<li>there are some very large individual components that are only needed for
+certain routes/states within the application</li>
+</ul>
+
+<p>In these cases, one may want to delay loading components.  Couch Potato is
+intended to make the above cases possible.</p>
+
+<p>Additionally, you may have an application that, while developing it, you do
+not know which components will ultimately be used.  For example, in a CMS
+(Content Management System), it is conceivable that components that did not
+even exist when the application was built are intended to be used within the
+application.</p>
+
+<p>In such a case, you most certainly need to delay loading the component!</p>
+
+<p>Couch Potato is intended to be <em>part</em> of a solution for this type of loose
+binding.</p>
+
+<p><a href="#/guide/01.conceptual.how-it-works">How It Works</a> provides a relatively high-level explanation
+of the methods that Couch Potato employs to allow for lazy loading and
+registration of components.</p></div>

@@ -1,10 +1,9 @@
-/* angular-couch-potato
+/*! angular-couch-potato - v0.1.0 - 2013-11-07
  * https://github.com/stu-salsbury/angular-couch-potato
- * Copyright (c) 2013 Stuart Salsbury
- *  Based on https://github.com/szhanginrhythm/angular-require-lazyload
+ * Copyright (c) 2013 Stu Salsbury;
+ *    Uses software code originally found at https://github.com/szhanginrhythm/angular-require-lazyload
  * Licensed MIT
  */
-
 (function() {
 
   var CouchPotato = function(angular) {

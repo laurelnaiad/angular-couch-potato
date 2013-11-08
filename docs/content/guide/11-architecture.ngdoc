@@ -1,0 +1,6 @@
+@ngdoc overview
+@name Architecture using Couch Potato
+@description
+
+You want to know about {@link 02.authoring.components Couch Potato Components}
+and {@link 02.authoring.app-module-setup App Module Setup}.

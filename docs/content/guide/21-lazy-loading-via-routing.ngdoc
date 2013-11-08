@@ -1,0 +1,36 @@
+@ngdoc overview
+@name Lazy Loading Via Routing
+@description
+
+## Couch Potato: Lazy Loading Via Routing
+
+Many applications will use Couch Potato exclusively within the context of their
+routing configurations, whether they use ngRoute, ui-router, or some other router
+(e.g. <a href="https://github.com/stu-salsbury/angular-detour/" target="_blank">angular-detour</a> or the inbuilt router in pre-2.0 versions of angular).
+
+The reasoning is that you are trying to lazy-load and register components that
+are used in the context of something must happen when the user visits a certain
+route/state of the application.  This page describes such usage in general.  *See {@link 45-adhoc-lazy-loading Ad Hoc Lazy Loading}
+for alternative usage.*
+
+#### Route/State-Based Lazy Loading In General
+
+When routes or states are *invoked*, an angular promise can resolved, and the $couchPotato *service* can invoke the *$couchPotatoProvider* to use RequireJS
+to download and register dependencies in the context of the promise.
+
+Since each component registers itself, *indirect* dependencies specified in AMD form are downloaded and registered along with the directly stated dependencies of the route.
+
+Couch Potato does not care which dependencies are resolved when the
+route is invoked.  It is an application's responsibility to specify directly or indirectly all requirements.
+
+For example, if a route depends on a Couch Potato component named
+"base-state-components", and that component depends on another component named "base-Services",
+then all base services will be registered when the state "base", which depends
+on the component "base-state-components" is activated.
+
+The documented configurations for Couch Potato are:
+
+* {@link 31-use-ngrouter Use with ngRouter/stock pre-2.0 router}
+* {@link 33-use-ui-router Use with angular-ui-router}
+* {@link 35-use-detour Use with angular-detour}
+

@@ -1,18 +1,22 @@
 module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-bower-task');
-  grunt.renameTask('bower', 'bowerInstall');
+  grunt.renameTask('bower', 'bowerTask');
   grunt.loadNpmTasks('grunt-bower');
+  grunt.renameTask('bower', 'gruntBower');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-ngdocs');
 
-  grunt.registerTask('doBower', ['bowerInstall', 'bower']);
-  grunt.registerTask('default', ['jshint','build']);
-  grunt.registerTask('build', ['clean', 'doBower', 'concat']);
-  grunt.registerTask('release', ['build','uglify:dist','jshint']);
+  // grunt.registerTask('bower', ['bowerTask', 'gruntBower']);
+  grunt.registerTask('bower', ['bowerTask', 'gruntBower']);
+  grunt.registerTask('default', ['build']);
+  grunt.registerTask('build', ['clean', 'bower', 'concat']);
+  grunt.registerTask('release', ['build','copy:samples', 'ngdocs']);
+  grunt.registerTask('docs', ['ngdocs']);
 
   // Print a timestamp (useful for when watching)
   grunt.registerTask('timestamp', function() {
@@ -32,16 +36,45 @@ module.exports = function(grunt) {
     '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
     '<%= pkg.homepage ? " * " + pkg.homepage + "\\n" : "" %>' +
     ' * Copyright (c) <%= grunt.template.today(\'yyyy\') %> <%= pkg.author.name %>;\n' +
-    ' *    Uses software code found at https://github.com/szhanginrhythm/angular-require-lazyload\n' +
+    ' *    Uses software code originally found at https://github.com/szhanginrhythm/angular-require-lazyload\n' +
     ' * Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %>\n */\n',
+    ngdocs: {
+      options: {
+        dest: 'dist/docs',
+        title: 'angular-couch-potato',
+        startPage: '/guide',
+        styles: ['docs/css/style.css'],
+        navTemplate: 'docs/html/nav.html',
+        html5Mode: false
+      },
+      guide: {
+        src: ['docs/content/guide/**/*.ngdoc'],
+        title: 'Guide'
+      },
+      api: {
+        src: ['src/**/*.js', 'docs/content/api/**/*.ngdoc'],
+        title: 'API Reference'
+      }
+    },
     clean: ['<%= dirs.dist %>/*'],
-    bower: {
+    gruntBower: {
       dev: {
         dest: '<%= dirs.dist %>/dependencies'
       }
     },
-    bowerInstall: {
+    bowerTask: {
       install: {
+        options: {
+          copy: false
+        }
+      }
+    },
+    copy: {
+      samples: {
+        expand: true,
+        cwd: './',
+        src: 'samples/**/*',
+        dest: 'dist'
       }
     },
     concat: {
@@ -52,21 +85,6 @@ module.exports = function(grunt) {
         },
         src:['<%= dirs.src.js %>'],
         dest:'<%= dirs.dist %>/<%= pkg.name %>.js'
-      }
-    },
-    uglify:{
-      dist: {
-        options: {
-          banner: '<%= banner %>'
-        },
-        src:'<%= dirs.dist %>/<%= pkg.name %>.js',
-        dest:'<%= dirs.dist %>/<%= pkg.name %>.min.js'
-      }
-    },
-    jshint:{
-      files:['Gruntfile.js', '<%= dirs.src.js %>'],
-      options: {
-        jshintrc: '.jshintrc'
       }
     }
   });

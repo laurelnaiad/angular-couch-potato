@@ -1,0 +1,64 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h2 id="couchpotatooverviewandusageguide">Couch Potato Overview and Usage Guide</h3>
+
+<p>Couch Potato aids in the lazy download and and run-time registration of:</p>
+
+<ul>
+<li>controllers</li>
+<li>factories</li>
+<li>directives</li>
+<li>values</li>
+<li>filters</li>
+<li>decorators</li>
+</ul>
+
+<p>It supports hierarchies of dependencies within these components, expressed as
+<a href="http://requirejs.org/" target="_blank">RequireJS</a> modules.  Applications can use Couch Potato to download and register components when they are needed to satisfy the requirements of a given <em>route</em>, or can do so ad-hoc in response to other application events.</p>
+
+<p><em>For the impatient, the hasty and the quick, you can stop reading and take a look at the
+<a href="samples/" target="_blank">samples</a> or check out their <a href="https://github.com/stu-salsbury/angular-couch-potato/samples" target="_blank">source code</a>.</em></p>
+
+<p><em>For the reference learner, you can dive straight into the <a href="#/api">API</a>.</em></p>
+
+<h3 id="thisguidecontainsseveralsections">This guide contains several sections:</h4>
+
+<p>The <a href="#/guide/05-conceptual">Conceptual Overview</a> section explains the purpose(s) for which
+Couch Potato is intended and how its usage differs from traditional AngularJS
+component definition and registration.</p>
+
+<p><a href="#/guide/11-architecture">Architecture using Couch Potato</a> describes how applications and their components are organized and authored in a Couch Potato context.</p>
+
+<p><a href="#/guide/21-lazy-loading-via-routing">Lazy Loading Via Routing</a> introduces the most common use case for Couch Potato -- loading and registering components in the context of route/state changes in the application.</p>
+
+<p><a href="#/guide/31-lazy-loading-ad-hoc">Ad Hoc Lazy Loading</a> demonstrates how arbitrary application code can invoke the download and registration of Couch Potato components.</p>
+
+<p><a href="#/guide/41-thoughts">Thoughts on Lazy Loading</a> is a sort of postlude in which some challenges and ideas for the future are presented, hopefully in a manner that is somewhat more organized than a ramble.</p>
+
+<h4 id="ofcoursethereisaahrefguide03faqfaqapage">Of course, there is a <a href="#/guide/03-faq">FAQ</a> page.</h5>
+
+<h2 id="blahblah">blah blah</h3>
+
+<p>describes how applications and their components are organized and authored in a Couch Potato context.</p>
+
+<p>The various "use case" sections show how Couch Potato can be used in several
+contexts:</p>
+
+<ul>
+<li><a href="#/guide/20a-with-ngRoute">Use with ngRoute</a> demonstrates how Couch Potato can
+be configured to load components when a particular <strong>route</strong> is activated during
+a user's interaction with an application;</li>
+<li><a href="#/guide/20b-with-resolve">Use with resolve</a> demonstrates how
+Couch Potato can be configured to load <em>individual</em> components when a particular
+<strong>ui-router state</strong> is acvtivated;</li>
+<li><a href="#/guide/20c-with-ui-templateProvider">Use with templateProvider</a> demonstrates how Couch Potato can be configured to load a <em>set of components
+along with a template</em> when a particular <strong>ui-router view</strong> is activated;</li>
+<li><a href="#/guide/20d-ad-hoc">Use Ad Hoc</a> demonstrates how Couch Potato can be called
+within application code that is outside the scope of any router.</li>
+</ul>
+
+<p>Finally, some <a href="#/guide/90-closing-thoughts">closing thoughts</a> are presented with the
+hope of stimulating discussion and interest in participating in Couch Potato
+specifically and the development of tools and techniques for building big
+applications/sites with AngularJS in general.</p></div>

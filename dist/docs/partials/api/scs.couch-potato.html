@@ -1,0 +1,52 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h2 id="scscouchpotatomodule">scs.couch-potato module</h3>
+
+<h3 id="loadingthescript">Loading the Script</h4>
+
+<p>Couch Potato needs RequireJS in order to be useful.  However, it is not
+necessary for your application to be bootstrapped using AMD.  You have
+two options:</p>
+
+<h4 id="ausetraditionalltscriptgttags">A. Use Traditional &lt;script&gt; Tags</h5>
+
+<p>If you use traditional script tags to load the module (i.e. you aren't
+ using AMD to structure your the non-lazy portion of your application,
+ you <strong>must</strong> load the following three scripts in this order (other
+ modules can be loaded wherever it makes sense for you, but these three
+ must follow the order):</p>
+
+<ol>
+<li>Angular</li>
+<li>Couch Potato</li>
+<li><p>RequireJS</p>
+
+<pre class="prettyprint linenums">
+  &lt;!-- in index.html --&gt;
+  &lt;script src="/js/angular.min.js"&gt;&lt;/script&gt;
+  &lt;script src="/js/angular-couch-potato.min.js"&gt;&lt;/script&gt;
+  &lt;script src="/js/require.min.js"&gt;&lt;/script&gt;
+  </pre></li>
+</ol>
+
+<h4 id="buserequirejs">B. Use RequireJS</h5>
+
+<p>If you use RequireJS, Couch Potato will first try to use an AMD module
+ that is defined with the name <code>'angular'</code>.  If it does not find
+ that, it will try to use an angular object defined as
+ <code>window.angular</code>.  This flexibility allows you to load angular
+ from a script tag (if you do so before your require.js script tag)
+ or from RequireJS -- the distinction will be critical if you are
+ using multiple instances of angular (in which case I pity you for
+ needing to, even though I understand that there are edge cases
+ where it is necessary) -- it must be very painful.</p>
+
+<h3 id="addingcouchpotatoasadependency">Adding Couch Potato as a Dependency</h4>
+
+<p>Reference Couch Potato as a Dependency as follows:
+<pre class="prettyprint linenums">
+var myModule = angular.module('myApp', ['myOtherDep', 'scs.couch-potato']);
+</pre>
+
+<p>See also the <a href="#/api/scs.couch-potato.$couchPotatoProvider">$couchPotatoProvider</a> documentation.</p></div>

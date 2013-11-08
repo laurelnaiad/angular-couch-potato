@@ -1,4 +1,3 @@
-dist/dependencies
-components
-lib
+bower_components
 node_modules
+*.bak

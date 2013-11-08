@@ -1,32 +1,31 @@
 {
-  "name": "ng-couch-potato",
-  "description": "Provider to Lazy-Load Components in AngularJS Applications",
-  "version": "0.0.5",
-  "homepage": "https://github.com/stu-salsbury/ng-couch-potato",
+  "name": "angular-couch-potato",
+  "description": "Provider/Service to Lazy-Load Components in AngularJS Applications",
+  "version": "0.1.0",
+  "homepage": "https://github.com/stu-salsbury/angular-couch-potato",
   "author": {
     "name": "Stu Salsbury",
     "url": "https://github.com/stu-salsbury"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/stu-salsbury/ng-couch-potato.git"
+    "url": "https://github.com/stu-salsbury/angular-couch-potato.git"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/stu-salsbury/ng-couch-potato/blob/master/LICENSE"
+      "url": "https://github.com/stu-salsbury/angular-couch-potato/blob/master/LICENSE"
     }
   ],
   "dependencies": {},
   "devDependencies": {
-    "express": "~3.3.4",
+    "express": "~3.4.4",
     "grunt": "~0.4.1",
-    "grunt-bower": "~0.5.1",
-    "grunt-bower-task": "~0.2.3",
-    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-bower": "~0.7.0",
+    "grunt-bower-task": "~0.3.2",
     "grunt-contrib-clean": "~0.4.0",
-    "grunt-contrib-concat": "~0.1.3",
-    "grunt-contrib-uglify": "~0.1.2",
-    "grunt-contrib-copy": "~0.4.1"
+    "grunt-ngdocs": "m7r/grunt-ngdocs",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-concat": "~0.3.0"
   }
 }

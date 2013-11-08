@@ -1,0 +1,13 @@
+@ngdoc overview
+@name Couch Potato API Reference
+@description
+
+## Couch Potato API Reference
+
+You can use the navbar on the left to search (see footnote), or
+click an item from the table of contents.
+
+If you're looking for an overview of Couch Potato or want to know how to
+get started, try the [guide](#/guide).
+
+*Footnote: Well, you __should__ be able to use the search, but it's broken in this version of Angular docs -- you can't (usefully) click on the results it finds :(*
