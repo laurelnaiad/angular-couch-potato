@@ -1,0 +1,79 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h2 id="couchpotatocomponents">Couch Potato Components</h3>
+
+<p>A typical Couch Potato component might look something like this:
+<pre class="prettyprint linenums">
+define(['app', 'lodash', 'myService', function(app, _) {
+
+  app.registerController('myController', ['$scope', '$timeout', '$myService',
+
+    function($scope, $timeout, $myService) {
+
+      $scope.concattedAlphas = '';
+      _.each(['a', 'b', 'c'], function(val) {
+        $scope.concattedAlphas += val;
+      });
+
+      $timeout(
+        function() {
+          $scope.aValueFromMyService = $myService.aValue;
+        },
+        1000
+      );
+    }
+  ]);
+});
+</pre>
+
+<p>That really silly controller depends on the AMD modules "lodash" and
+"myService".</p>
+
+<p>lodash is just the lodash utility library.  It knows nothing
+about Couch Potato (or Angular) and doesn't need to.  This is regular RequireJS here.</p>
+
+<p>On the other hand, "myService" is itself (or at least might be) a Couch Potato AMD module.  It is
+defined similarly to the one we're defining here (i.e.
+app.registerService(...)).  Note the use of the word "might".  It's also
+entirely possible that myService was configured as a non-lazy component.  In
+fact, when you use Couch Potato and you define components as modules like the
+one above, you are in control of whether they end up being loaded lazily or
+built into your application as part of a RequireJS compilation/minification
+build step (e.g in a grunt task).</p>
+
+<p>Both modules are required as part of requiring myController.  In practical
+terms, this means that:</p>
+
+<ul>
+<li>lodash can be used within the controller; and</li>
+<li>myService will be registered before anyone tries to use myController, thus
+it can be injected into myController.</li>
+</ul>
+
+<p>In this way, Couch Potato components can depend on each other.  This follows
+the "AMD way" of expressing dependencies, so that users of myController (e.g.
+routes or states) are not forced to know what components the controller requires
+ -- the controller module is tracking that,
+and RequireJS is ensuring that everything it needs is prepped and ready to go.</p>
+
+<p>You may have noticed that we have not discussed the "app" dependency.  It's the
+application module.  It deserves some discussion.</p>
+
+<p>These AMD modules run outside the context of Angular.  There needs to be a way
+to tie back into your app in order to register the component with Angular.  The
+application module is the bridge.</p>
+
+<p>It turns out that in order to make it possible for Couch Potato to do its work,
+we've prepared the application module with some sugary functions that expose
+the Couch Potato services.  Later, we'll see what those sugary functions look
+like.  For now, just know that app.registerController is a function that's using
+Couch Potato to get the controller registered.</p>
+
+<p>The rest of the code in this module is just standard Angular stuff.  The only
+real difference is the define function that wraps it and the call
+to app.registerController instead of app.controller.</p>
+
+<p>Ok, with components out of the way, let's loop back and look at the app module
+again to understand how it's enabling this app.registerController business.
+Read about <a href="#/guide/19-app-module-setup">setting up the app module</a>.</p></div>

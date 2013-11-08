@@ -1,0 +1,36 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h2 id="couchpotatolazyloadingviarouting">Couch Potato: Lazy Loading Via Routing</h3>
+
+<p>Many applications will use Couch Potato exclusively within the context of their
+routing configurations, whether they use ngRoute, ui-router, or some other router
+(e.g. <a href="https://github.com/stu-salsbury/angular-detour/" target="_blank">angular-detour</a> or the inbuilt router in pre-2.0 versions of angular).</p>
+
+<p>The reasoning is that you are trying to lazy-load and register components that
+are used in the context of something must happen when the user visits a certain
+route/state of the application.  This page describes such usage in general.  <em>See <a href="#/guide/45-adhoc-lazy-loading">Ad Hoc Lazy Loading</a>
+for alternative usage.</em></p>
+
+<h4 id="routestatebasedlazyloadingingeneral">Route/State-Based Lazy Loading In General</h5>
+
+<p>When routes or states are <em>invoked</em>, an angular promise can resolved, and the $couchPotato <em>service</em> can invoke the <em>$couchPotatoProvider</em> to use RequireJS
+to download and register dependencies in the context of the promise.</p>
+
+<p>Since each component registers itself, <em>indirect</em> dependencies specified in AMD form are downloaded and registered along with the directly stated dependencies of the route.</p>
+
+<p>Couch Potato does not care which dependencies are resolved when the
+route is invoked.  It is an application's responsibility to specify directly or indirectly all requirements.</p>
+
+<p>For example, if a route depends on a Couch Potato component named
+"base-state-components", and that component depends on another component named "base-Services",
+then all base services will be registered when the state "base", which depends
+on the component "base-state-components" is activated.</p>
+
+<p>The documented configurations for Couch Potato are:</p>
+
+<ul>
+<li><a href="#/guide/31-use-ngrouter">Use with ngRouter/stock pre-2.0 router</a></li>
+<li><a href="#/guide/33-use-ui-router">Use with angular-ui-router</a></li>
+<li><a href="#/guide/35-use-detour">Use with angular-detour</a></li>
+</ul></div>

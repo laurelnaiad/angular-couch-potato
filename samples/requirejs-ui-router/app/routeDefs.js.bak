@@ -1,0 +1,232 @@
+/**
+ * routeDefs Defings routing specific to this application.
+ *
+ * TL/DR? See the bottom of the file for a wham-bang coffeescript version of
+ * this file with no comments.
+ *
+ * Note this would be compiled by r.js since it is traceable back to main.js.
+ *
+ * Compared to the ui-router demo, this should look pretty minmalistic. A
+ * couple of things are going on here. The routing provider is going to make
+ * some assumptions about what you're trying to do with respect to templates
+ * and controllers:
+ *
+ * a) if you specify neither, the templateUrl property will be used to
+ * load the template and a resolve: dependencies property will be used
+ * to lazy-load/register dependencies (including the controller). The routing
+ * provider will specify the name of the controller automatically
+ *
+ * b) if you specify controller: null, the routing provider will remove that
+ * specification before defining the state to ui-router instead of providing
+ * the default name for the controller based on state name
+ *
+ * c) if you use template or templateUrl or templateProvider, the routing
+ * provider will not make any assumptions.
+ *
+ * d) if you specify templateProvider and do not want a controller, you need
+ * to assign null to the controller property or else the routing provider will
+ * assume there's a controller with the default name.
+ *
+ * You don't need to do this for Couch Potato, but you can. A side-intent of
+ * this demo is to demonstrate some boilerplate-avoidance techniques.
+ *
+ * Some notes on flat vs. hierarchical states....
+ *
+ * It's easier to define a set of states in dot notation, especially in
+ * javascript (as opposed to coffeescript) what with the braces and all. It's
+ * also nicer at runtime to have a hierarchy. The routing provider will
+ * hierarchicalize the states when it loads these definitions.
+ *
+ * Regarding files and directory structure. There is something nice about
+ * *not* using directories to organize views. However, given that your
+ * hierarchy could get somewhat deep, one needs to watch out for file name
+ * length. Thus, this sample (and the routing provider in it) use a directory
+ * structure rather than dot notation and a flatter structure. If you don't
+ * have a deep hierarchy, there's no reason you couldn't modify the routing
+ * service to work with flatly organized view names and dot notation.
+ *
+ * Remember -- couch potato is about lazy loading and registration -- all of
+ * this sugar that is meant to save you typing and refactoring and to keep
+ * your logic in your components isn't necessary to get the couch potato
+ * benefits.
+ *
+ * Regarding controller: null -- you probably won't use it very much. How many
+ * views will you have that don't need have use for a controller?
+ */
+define([], function() {
+
+  return {
+
+    notFoundUrl     : '/notFound',
+
+    redirects: {
+      '/c?id'       : '/contacts/:id',
+      '/user/:id'   : '/contacts/:id'
+    },
+
+    states: {
+
+      'home': {
+        url: '/',
+
+        // in specifying a templateUrl and no controler, we're effectively
+        // turning off the assumption making mechanism in the routing provider
+        templateUrl: 'views/home/tmpl.html',
+
+        // ok, this isn't actually a real world site, but you can put extra
+        // information and functionality in/on your states to solve real world
+        // problems, too!  The routing service makes it easy to get at them
+        // either ad-hoc or in relation to $state.current.
+        myProp: 'I\'m home!',
+        myFunc: function() { return 'Hello from home!'; }
+      },
+
+      'contacts': {
+        abstract      : true,
+        url           : '/contacts'
+
+        // note the absence of both controller and any of the template
+        // properties -- the routing service provider is going to assume that
+        // all dependencies (including but not limited to a controller) are
+        // loaded by a 'views/contacts' AMD component, that the controller's
+        // name will be 'contactsController', and that the AMD component will
+        // return the template HTML.  it could use templatProvider to make this
+        // happen -- the state definitions would be smaller, but that doesn't
+        // buy you anything when the routingProvider is doing it for you.  Instead
+        // it uses templateUrl -- this enables the browser to be downloading
+        // the tempalte *while* it's downloading the other dependencies, rather
+        // than in sequence.
+
+        // separately, note that we could have done the following, but in this
+        // sample will assume that your UI wants to be snappier -- we'll display
+        // a spinner in the new view while the controller  resolves the
+        // contacts.
+
+        // resolve       : {
+        //   'contacts': [
+        //     'contacts', function(contacts) {
+        //       return contacts.all();
+        //     }
+        //   ]
+        // }
+      },
+
+      'contacts.list': {
+        controller: null
+      },
+
+      'contacts.detail': {
+        url: '/{contactId:[0-9]{1,4}}',
+        views: {
+
+          // that's right, it's baked-in.  Default views are named after their
+          // state.
+          '': {},
+          // in filenames @ will be dropped -- name views
+          // so that there is no ambiguity in the filenames
+          'hint@': { controller: null },
+          // do the world and yourself a favor and be careful with case-
+          // sensitivity!  Unix file names and javascript are case sensitive.
+          // Technically url paths are too, even though some web servers ignore
+          // this. Most of us can name at least one popular operating system
+          // that is insenstive to case with file names.
+          'menuTip': {}
+        }
+      },
+
+      'contacts.detail.item': {
+        url: '/item/:itemId',
+        views: {
+
+          '': {},
+          'hint@': {  controller: null }
+
+        }
+      },
+
+      'contacts.detail.item.edit': {
+        views: {
+
+          '@contacts.detail': {}
+        }
+      },
+
+      'about': {
+        url: '/about',
+        controller: null
+      },
+
+      'notFound': {
+        url: '/notFound'
+      }
+
+    }
+
+  };
+
+});
+
+// it would look like the following in CoffeeScript with no comments:
+
+// define [], ->
+//   {
+//     notFoundUrl: '/notFound'
+//
+//     redirects: {
+//       '/c?id'        : '/contacts/:id'
+//       '/user/:id'    : '/contacts/:id'
+//     }
+//
+//     states: {
+
+//       'home': {
+//         url: '/'
+//         templateUrl  : 'views/home/tmpl.html'
+//         myProp       : 'I\'m home!'
+//         myFunc       : ->
+//           'Hello from home!'
+//       }
+
+//       'contacts': {
+//         abstract     : true,
+//         url          : '/contacts'
+//       }
+
+//       'contacts.list' : {
+//         controller   : null
+//       }
+
+//       'contacts.detail': {
+//         url          : '/{contactId:[0-9]{1,4}}'
+//         views: {
+//           ''           : {}
+//           'hint@'      : { controller: null }
+//           'menuTip'    : {}
+//         }
+//       }
+
+//       'contacts.detail.item': {
+//         url          : '/item/:itemId'
+//         views: {
+//           ''           : {}
+//           'hint@'      : {  controller: null }
+//         }
+//       }
+
+//       'contacts.detail.item.edit': {
+//         views: {
+//           '@contacts.detail': {}
+//         }
+//       }
+
+//       'about': {
+//         url: '/about'
+//         controller: null
+//       }
+
+//       'notFound': {
+//         url: '/notFound'
+//       }
+//     }
+//   }
+

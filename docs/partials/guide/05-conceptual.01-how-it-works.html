@@ -1,0 +1,40 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h2 id="couchpotatohowitworks">Couch Potato: How It Works</h3>
+
+<h4 id="ingeneral">In General</h5>
+
+<p>Couch Potato works by preparing itself -- at configuration-time to do -- at
+run-time -- the work of registering components.</p>
+
+<p>In a normal AngularJS application, when run-time starts (which is typically
+when module.run happens or when the application is bootstrapped), all providers
+become "uninjectable."  As such, you lose the ability to configure components.</p>
+
+<p>By storing references to the key registration "vehicles", Couch Potato can perform
+registrations during run-time.  The components Couch Potato maintains references
+to are:</p>
+
+<ul>
+<li>$controllerProvider,</li>
+<li>$compileProvider,</li>
+<li>$provide,</li>
+<li>$filterProvider</li>
+</ul>
+
+<p>Lazy-registration would be of little use if you couldn't lazily <em>load</em> script.</p>
+
+<p>This is where AMD (Asynchronous Module Definition) comes in.  Couch Potato uses <a href="requirejs.org" target="_blank">RequireJS</a>.  If you are unfamiliar with
+RequireJS, you'll want to read up a little.  The general idea is that an AMD
+module definition states a list of dependencies and then specifies its
+definition.</p>
+
+<p>When a module is requested ("required" in AMD terms), all of it dependencies
+are fetched (or retrieved from the cache if they've already been required), and
+then passed to the module as function parameters.  Continue by reading about
+<a href="#/guide/17-couch-potato-components">Couch Potato Components</a>.</p>
+
+<p>This guide is about to get heavy.  If you haven't already done so, it's highly
+recommended that you stop and <a href="samples">look at the samples</a>
+before you proceed.</p></div>

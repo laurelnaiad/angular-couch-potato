@@ -1,0 +1,67 @@
+/**
+ * routing service/provider -- sets up and manages routing -- you could share
+ * this component in all of your ui-router/Couch Potato apps (adapting it to
+ * your needs/style).
+ */
+define(['app', 'angular', 'routeDefs'], function(app, angular, routeDefs) {
+
+  // notice -- we're using the couchPotato-provided registerProvider function.
+  // Since this component is (indirectly) referenced in main.js, when/if this
+  // site is optimized with r.js, routingProvider/routing service will be
+  // included in the minified and included in the (non-lazy) application script.
+  // If you're scratching your head about it being referenced in main.js, notice
+  // the path: main.js -> run.js -> config.js -> services/routing.js.
+  // Anything that is RequireJS-depended upon in run or config will be non-lazy
+  // and included in optimized apps.  We can use the same Couch Potato
+  // architecture pattern to define such things.
+  app.registerProvider(
+    'routing',
+    [
+      '$couchPotatoProvider', '$stateProvider', '$urlRouterProvider',
+      function($lazy, $stateProvider, $urlRouterProvider) {
+        // using the name lazy instead of couchPotatoProvider to keep from it
+        // cluttering the state definitions.
+
+        // make states definitions accessible on the provider interface
+        this.routeDefs = routeDefs;
+
+        // apply the state definitions to ui-router
+        angular.forEach(routeDefs.states, function(stateDef, name) {
+          $stateProvider.state(name, stateDef);
+        });
+
+        angular.forEach(
+          routeDefs.redirects,
+          function(redirectTo, redirectFrom) {
+            $urlRouterProvider.when(redirectFrom, redirectTo);
+
+          }
+        );
+
+        // this is different than the ui- router demo, but demonstrates use of a
+        // "not found/404" page that many sites in the real world will employ.
+        $urlRouterProvider.otherwise(routeDefs.notFoundUrl);
+
+        // the service
+        this.$get = function() {
+
+          return {
+
+            // at the very least, give your app access to your state definitions
+            // which may contain custom embedded functionality
+            stateDefs: stateDefs
+
+            // what follows is a demonstration of one reason why I'm going to
+            // try to stick to CoffeeScript in the future.  Thank the god of
+            // your choice for jslint/jshint.
+          };
+
+        };
+
+      }
+    ]
+  );
+
+});
+
+

@@ -1,0 +1,37 @@
+<h1><code ng:non-bindable="">$couchPotatoProvider</code>
+<span class="hint">(service in module <code ng:non-bindable="">scs.couch-potato</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p>Injects and retains references to providers that will be used
+by the <a href="#/api/scs.couch-potato.$couchPotato">$couchPotato service</a>
+at run-time.</p>
+
+<p>It is <strong>mandatory</strong> that you inject the provider before
+your app's module.run is called (e.g. in module.config).</p></div>
+<h2 id="Dependencies">Dependencies</h2>
+<ul class="dependencies"><li><code ng:non-bindable=""><a href="#/api/ng.$controllerProvider">$controllerProvider</a></code>
+</li>
+<li><code ng:non-bindable=""><a href="#/api/ng.$compileProvider">$compileProvider</a></code>
+</li>
+<li><code ng:non-bindable=""><a href="#/api/ng.$filterProvider">$filterProvider</a></code>
+</li>
+<li><code ng:non-bindable=""><a href="#/api/ng.$provide">$provide</a></code>
+</li>
+</ul>
+<h2 id="Example">Example</h2>
+<div class="example"><pre class="prettyprint linenums">
+myModule.config(
+  [
+    '$couchPotatoProvider', 'myOtherProvider',
+    function($couchPotatoProvider, myOtherProvider) {
+      myOtherProvider.config = { someParam: 'demo' };
+      // $couchPotatoProvider needs no specific configuration
+    }
+  ]
+);
+</pre>
+
+<p>See the <a href="#/api/scs.couch-potato">couch-potato module documentation</a> to learn
+how to load the module.</p></div>
+</div>

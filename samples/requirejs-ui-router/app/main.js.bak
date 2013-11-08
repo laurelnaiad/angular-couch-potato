@@ -1,0 +1,44 @@
+require.config({
+
+  paths: {
+
+    'angular'               : '../../../dependencies/angular',
+    'angular-ui-router'     : '../../../dependencies/angular-ui-router',
+    'angular-couch-potato'  : '../../../angular-couch-potato',
+    'views'                 : '../views'
+
+  },
+
+  shim: {
+
+    'angular': {
+      exports   : 'angular'
+    },
+
+    'angular-ui-router': {
+      deps      : ['angular']
+    }
+
+  }
+
+});
+
+// run is required to force the app to run, not because we need to interact
+// with it.  Anything required here wil by default be combined/minified by r.js
+// if you use it.
+require(['app', 'angular', 'run'], function(app, angular) {
+
+  angular.element(document).ready(function() {
+
+    angular.bootstrap(document, [app['name'], function() {
+
+      // for good measure, put ng-app on the html element
+      // studiously avoiding jQuery because angularjs.org says we shouldn't
+      // use it.  In real life, there are a ton of reasons to use it.
+      angular.element(document).find('html').addClass('ng-app');
+
+    }]);
+
+  });
+
+});

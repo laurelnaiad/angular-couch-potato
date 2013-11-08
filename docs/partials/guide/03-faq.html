@@ -1,0 +1,60 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h2 id="fequentlyaskedcouchpotatoquestions">Fequently Asked Couch Potato Questions</h3>
+
+<h4 id="whyusecouchpotato">Why Use Couch Potato</h5>
+
+<p>Couch Potato is useful if you want to delay a few, some or most of your Angular components for speed or scale reasons.  It allows you to author all components in one framework, and choose through configuration which components are "compiled in" to your application and which ones are lazy loaded, and to have fine-grained control over when that lazy loading takes place.  It can help you organize dependencies for your routes.</p>
+
+<h4 id="iscouchpotatoareplacementforxyzrouter">Is Couch Potato a replacement for xyzRouter?</h5>
+
+<p>No, Couch Potato isn't a router.  It's meant to be used <em>with</em> a router.  It is known to work with with current versions of <a href="https://github.com/angular-ui/ui/router" target="_blank">angular-ui-router</a> (recommended) and Angular's stock router (and ngRoute). It is built into <a href="https://github.com/afterglowtech/angular-detour" target="_blank">angular-detour</a>.  It <em>should</em> work in any context where promises are resolved.</p>
+
+<p>It can also be used outside the context of routing.</p>
+
+<h4 id="canundefineorredefinecomponents">Can undefine or redefine components?</h5>
+
+<p>At this time, you cannot undefine or redefine components at run-time.</p>
+
+<h4 id="canilazydependonmodules">Can I lazy-depend on modules?</h5>
+
+<p>No.  At least one experiment is known to have established lazy-loading modules to be possible, but it involves hacking Angular.</p>
+
+<p><strong>What does work</strong>: If you have a component that you want to lazy-load and it depends on
+a non-Angular-based script library, such as d3 or a jQuery plugin, you can depend on that
+library in the Couch Potato context and defer loading it until your component is loaded.</p>
+
+<p><strong>What doesn't work</strong>: If you have a component that you want to lazy-load and it depends on an Angular-based module, e.g. angular-ui/bootstrap, then your application itself must depend on bootstrap at declaration time.</p>
+
+<h4 id="canilazydependonmodules">Can I lazy-depend on modules?</h5>
+
+<p>No.  At least one experiment is known to have established lazy-loading modules to be</p>
+
+<h4 id="runtimemoduleloadingiscomingtoangularhowiscouchpotatorelated">Run-time Module Loading is Coming To Angular -- How is Couch Potato Related?</h5>
+
+<p>It's not.</p>
+
+<p>For one, Couch Potato doesn't operate at the module level by design.  Operating at the component level within application components is the intent of Couch Potato.  Module-level dependencies are at a higher-level.</p>
+
+<p>Two, run-time loading of modules isn't here, yet.  Time will tell whether/how Couch Potato will fit into the future AnguarJS landscape.</p>
+
+<h4 id="whatsinthefuture">What's in the future?</h5>
+
+<ul>
+<li><p>Couch Potato tests: the project does not have any tests, yet.  It should have tests
+before version 1.0.0.</p></li>
+<li><p>Testing components that are authored as Couch Potato components: guidelines/examples
+for testing apps built with Couch Potato.  Will probably be based on protractor (new Angular testing framework).</p></li>
+<li><p>Undefining/redefining components (for scale).  RequireJS has an undef function
+that may enable this, but it may also be quite complicated.  This is pie-in-the-sky stuff
+for now.</p></li>
+</ul>
+
+<h4 id="wherecaniaskquestions">Where can I ask questions?</h5>
+
+<p>If the documentation isn't enough and/or you're having problems, use the <a href="https://github.com/stu-salsbury/angular-couch-potato/issues target="_blank">issues list</a> of the github repository.</p>
+
+<h4 id="canicontributetocouchpotato">Can I contribute to Couch Potato?</h5>
+
+<p>Absolutely.  Pull requests are welcome.</p></div>

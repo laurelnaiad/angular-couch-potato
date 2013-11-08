@@ -1,0 +1,228 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h2 id="couchpotatoapplicationmodulesetup">Couch Potato: Application Module Setup</h3>
+
+<h3 id="stopbreatheandlookatthesamples">Stop, Breathe and Look at the Samples</h4>
+
+<p>Yes, you were called impatient, hasty and quick if you wanted to look at the
+samples.  Well it was a joke (perhaps a weak one).  Or maybe it was deemed important
+to read the conceptual overview.  In any case, the rest of this
+guide <strong>assumes</strong> you've looked at the samples.  Using Couch Potato is actually
+pretty easy, and without seeing it in action it may feel more complicated
+and confusing than it needs to be or is.</p>
+
+<p>So have a look at the
+<a href="https://github.com/stu-salsbury/angular-couch-potato/tree/master/samples" target="_blank">source and its readme</a>
+and see them <a href="samples/" target="_blank">in action</a>!</p>
+
+<p>Since Couch Potato component definitions run outside of the Angular context,
+there are two things we need to "do to" the app in order to be able to reach
+back into it to register components.  Let's take them in order of when they
+occur in the lifecycle of the application.</p>
+
+<p>When the application module is declared, we want to define the registerXXX functions that Couch Potato components use.</p>
+
+<p>The easiest and best way is probably to let Couch Potato do it for us. When you
+declare your module and its dependencies, ask Couch Potato to configure the
+app.</p>
+
+<p>Two examples follow.  The first assumes you've used &lt;script&gt; tags to
+load Angular and Couch Potato and the second uses the AMD-style.  It's
+important to realize that the choice <em>does not</em> impact the way Couch Potato
+components are authored.</p>
+
+<p>Using &lt;script&gt; tags:
+<pre class="prettyprint linenums">
+  var myApp = angular.module('myApp', ['scs.couch-potato']);
+
+  couchPotato.configureApp(myApp);
+</pre>
+
+<p>Using AMD:
+<pre class="prettyprint linenums">
+define(['angular','couch-potato'], function(angular, couchPotato) {
+  var myApp = angular.module('myApp', ['scs.couch-potato']);
+
+  couchPotato.configureApp(myApp);
+});
+</pre>
+
+<p>Pretty easy.</p>
+
+<p>So what just happened?  Couch Potato has assigned some functions as variables
+on the app.  Specifically:</p>
+
+<ul>
+<li>registerController(name, controller)</li>
+<li>registerFactory(name, factory)</li>
+<li>registerDirective(name, directive)</li>
+<li>registerFilter(name, filter)</li>
+<li>registerDecorator(name, decorator)</li>
+<li>registerValue(name, value)</li>
+</ul>
+
+<p>It is these functions that the Couch Potato components call to accomplish
+registration.  More on their inner workings below.</p>
+
+<p>The second thing we want to do occurs when the application enters run-time.</p>
+
+<pre class="prettyprint linenums">
+myApp.run(['$couchPotato', function($couchPotato) {
+  myApp.lazy = $couchPotato; //note that you need to use the name 'lazy'
+});
+</pre>
+
+<p>This little assignment gives those register functions that were assigned above
+the capability of asking Couch Potato to do its work.  Remember that the RequireJS AMD
+modules <em>do not</em> run in an Angular context -- hence we wouldn't be able to use
+dependency injection to grab the $couchPotato service.  Latching onto it in
+module.run works around this.</p>
+
+<p>So back to those registerXXX functions.  In fact, they contain branches.
+Each one looks something like this (we'll use registerController but they're
+all doing the same thing).  Keep in mind you don't write these, Couch Potato
+assigns them to the app module for you when you call configureApp.</p>
+
+<pre class="prettyprint linenums">
+function registerController(name, controller) {
+  if (app.lazy) {
+    app.lazy.registerController([name, controller]);
+  }
+  else {
+    app.controller(name, controller);
+  }
+}
+</pre>
+
+<p>Why the branch?  It enables calls to registerController (or registerDirective,
+etc.) to function at at configuration time <strong>or</strong> at run time.  This is really
+handy.  In practical terms, you can author <em>all</em> of your components as Couch
+Potato components, whether you want to compile them into your eventual app.js
+using r.js optimization or you want to load/register them lazily.</p>
+
+<h3 id="advancedsetup">Advanced Setup</h4>
+
+<p>What follows assumes you're using RequireJS to load
+your app and is relatively advanced.  It is likely to be confusing to those who
+do not know RequireJS well.  (If you're using &lt;script&gt; tags then you're probably
+compiling certain components directly into your application module anyway.)</p>
+
+<p>You've been warned.  If you want to skip this section you can move straight on
+to <a href="#/guide/25-lazy-loading-via-routing">Lazy Loading Via Routing</a>.</p>
+
+<p>The distinction between whether r.js will compile Couch Potato components
+ or whether they will be lazy-loaded/registered is effected by whether or not you <code>require</code> (as in
+use the RequireJS require function on) them within your RequireJS <code>main.js</code>
+file (or wherever it is that you have your RequireJS entry point).  An example is probably necessary to flesh out this concept.</p>
+
+<p>Let's say your (over)simplified main.js looks like this -- relatively normal
+RequireJS configuration for an Angular app:</p>
+
+<pre class="prettyprint linenums">
+require.config({
+  paths: {
+    'angular':            '//somecdn/angular.min.js',
+    'angular-ui-router':  '//somecdn/angular-ui-router.min.js',
+    'couch-potato':       '/js/angular-couch-potato.min.js'
+  }
+});
+
+require(['app', 'run'], function(app) {
+  angular.element(document).ready(function() {
+    angular.bootstrap($('html'), [
+      app['name'], function() {
+        $('html').addClass('ng-app');
+      }
+    ]
+  });
+});
+</pre>
+
+<p>'app' is your AMD module that defines the Angular app module.</p>
+
+<p>'run' is your AMD module that causes the Angular app to be run.</p>
+
+<p>This main.js just initializes the app and runs it, then attaches the
+bootstrap function to the document ready event.  As said, this is basic
+RequireJS/Angular stuff.  Uses jQuery, but that's not important.</p>
+
+<p>Everything in main.js will be compiled by r.js -- <strong>including the components
+that are required, and the ones they require, etc.</strong></p>
+
+<p>So anything that 'app' depends on, and anything that 'run' depends on -- those
+will be compiled into your output from r.js (if they are not prevented by being
+loaded from a CDN or otherwise exluded from the r.js compile process).</p>
+
+<p>Let's look at app.js:
+<pre class="prettyprint linenums">
+define(['angular', 'couch-potato', 'ui-router'],
+  function(angular, couchPotato) {
+    var app = angular.module('myApp', [
+      'ui.state'
+      'scs.couch-potato'
+    ]);
+
+    couchPotato.configureApp(app);
+
+    // return app so you can access it using RequireJs
+    return app;
+  }
+);
+</pre>
+
+<p>Aside from configuring the app for Couch Potato, this is all still normal
+RequireJS/Angular.  Don't get bored -- we're getting toward the point here...</p>
+
+<p>Let's look at run.js:
+<pre class="prettyprint linenums">
+define(['app', 'config', 'someService'],
+  function(app) {
+    app.run(['$couchPotato', 'someService',
+      function($couchPotato, someService) {
+        app.lazy = $couchPotato;
+      }
+    ]);
+  }
+);
+</pre>
+
+<p>So this causes the app to go into run mode, and assigns $couchPotato to
+app.lazy.  For the present exposition, what matters is that 'config' is
+required.</p>
+
+<p>Here's config.js:
+<pre class="prettyprint linenums">
+define(['app', 'couch-potato', 'compiled-components'], function(app) {
+  app.config('$couchPotatoProvider', function($couchPotatoProvider) {
+    // nothing really needed here except the rest of your app.config logic
+  });
+});
+</pre>
+
+<p>So, because it's necessary, $couchPotatoProvider is injected. But the point
+here is that 'compiled-components' is required.  This is the module in which
+you specific which of your Couch Potato components will <em>not</em> be lazy loaded,
+and instead will be compiled into your app by r.js.</p>
+
+<p>One approach here is to bail on lazy loading filters and decorators.  You may
+also have some directives that are used all over the place and not worth
+tracking as individual dependencies or lazy loading them.</p>
+
+<p>In which case, 'compiled-components.js' could look like:
+<pre class="prettyprint linenums">
+define(
+  [
+    'filters',
+    'decorators',
+    'common-directives'
+  ], function() {
+});
+</pre>
+
+<p>Since all of the modules in this exposition are required down from main.js,
+r.js is going to build them into the compiled output.</p>
+
+<p>Components that are not required by this tree of dependencies will be lazy
+loaded as disussed in
+<a href="#/guide/25-lazy-loading-via-routing">Lazy Loading Via Routing</a>.</p></div>

@@ -1,0 +1,6 @@
+div[role=main] div.row div.span3 {
+  width: 240px;
+}
+div[role=main] div.row div.span9 {
+  width: 680px;
+}
