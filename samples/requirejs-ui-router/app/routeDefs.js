@@ -4,7 +4,7 @@ define(['app'], function(app) {
     [
       '$stateProvider',
       '$urlRouterProvider',
-      '$couchPotatoProvider'
+      '$couchPotatoProvider',
       function (
         $stateProvider,
         $urlRouterProvider,
