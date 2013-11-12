@@ -7,14 +7,13 @@ For documentation, please see
 To see the samples live, go to
 <a href="http://stu-salsbury.github.io/angular-couch-potato/samples/" target="_blank">http://stu-salsbury.github.io/angular-couch-potato/samples/</a>
 
-
 #### Installing Source/Running Samples Locally
 
 See the README in the [sample apps](https://github.com/stu-salsbury/ng-couch-potato/tree/master/samples) for basic demonstrations.
 
 #### History/Attribution
 
-At this time, couch-potato is essentially a formalization of a portion of some angular seed apps that demonstrate this technique.  One of them is [angular-require-lazyload](https://github.com/szhanginrhythm/angular-require-lazyload), from which code was copied directly and reorganized/repackaged.  Aside from leveraging the dependency-management features of AMD to chain dependencies, it doesn't have any additional features when compared to these seed apps.
+Couch Potato has its roots in [angular-require-lazyload](https://github.com/szhanginrhythm/angular-require-lazyload) but has grown into something that supports hierarchical dependencies and features ease-of-use and efficiency optimizations to make lazy loading vs. compiling into your app easy.
 
 #### License
 
