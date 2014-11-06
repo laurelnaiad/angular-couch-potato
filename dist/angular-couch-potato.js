@@ -4,7 +4,6 @@
  *    Uses software code originally found at https://github.com/szhanginrhythm/angular-require-lazyload
  * Licensed MIT
  */
-
 (function() {
 
   var CouchPotato = function(angular) {
