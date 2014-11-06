@@ -1,9 +1,10 @@
-/*! angular-couch-potato - v0.1.1 - 2013-11-12
+/* angular-couch-potato
  * https://github.com/stu-salsbury/angular-couch-potato
- * Copyright (c) 2013 Stu Salsbury;
- *    Uses software code originally found at https://github.com/szhanginrhythm/angular-require-lazyload
+ * Copyright (c) 2013 Stuart Salsbury
+ *  Based on https://github.com/szhanginrhythm/angular-require-lazyload
  * Licensed MIT
  */
+
 (function() {
 
   var CouchPotato = function(angular) {
@@ -87,6 +88,13 @@
       //to be applied, even if they are not doing so in an angular context.
 
       function registerValue(value, apply) {
+        $provide.value.apply(null, value);
+        if (apply) {
+          rootScope.$apply();
+        }
+      }
+
+      function registerConstant(value, apply) {
         $provide.value.apply(null, value);
         if (apply) {
           rootScope.$apply();
@@ -231,6 +239,7 @@
         rootScope = $rootScope;
 
         svc.registerValue = registerValue;
+		svc.registerConstant = registerConstant;
         svc.registerFactory = registerFactory;
         svc.registerService = registerService;
         svc.registerFilter = registerFilter;
@@ -363,6 +372,17 @@
         }
         return app;
       };
+
+      app.registerConstant = function(name, value) {
+        if (app.lazy) {
+          app.lazy.registerConstant([name, value]);
+        }
+        else {
+          app.constant(name, value);
+        }
+        return app;
+      };
+
 
       app.registerFilter = function(name, filter) {
         if (app.lazy) {
