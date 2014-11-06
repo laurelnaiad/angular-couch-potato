@@ -239,7 +239,7 @@
         rootScope = $rootScope;
 
         svc.registerValue = registerValue;
-		svc.registerConstant = registerConstant;
+        svc.registerConstant = registerConstant;
         svc.registerFactory = registerFactory;
         svc.registerService = registerService;
         svc.registerFilter = registerFilter;
