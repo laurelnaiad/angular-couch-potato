@@ -93,6 +93,13 @@
         }
       }
 
+      function registerConstant(value, apply) {
+        $provide.value.apply(null, value);
+        if (apply) {
+          rootScope.$apply();
+        }
+      }
+
       function registerFactory(factory, apply) {
         $provide.factory.apply(null, factory);
         if (apply) {
@@ -231,6 +238,7 @@
         rootScope = $rootScope;
 
         svc.registerValue = registerValue;
+        svc.registerConstant = registerConstant;
         svc.registerFactory = registerFactory;
         svc.registerService = registerService;
         svc.registerFilter = registerFilter;
@@ -363,6 +371,17 @@
         }
         return app;
       };
+
+      app.registerConstant = function(name, value) {
+        if (app.lazy) {
+          app.lazy.registerConstant([name, value]);
+        }
+        else {
+          app.constant(name, value);
+        }
+        return app;
+      };
+
 
       app.registerFilter = function(name, filter) {
         if (app.lazy) {
