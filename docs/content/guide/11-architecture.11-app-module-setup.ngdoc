@@ -14,7 +14,7 @@ pretty easy, and without seeing it in action it may feel more complicated
 and confusing than it needs to be or is.
 
 So have a look at the
-<a href="https://github.com/stu-salsbury/angular-couch-potato/tree/master/samples" target="_blank">source and its readme</a>
+<a href="https://github.com/laurelnaiad/angular-couch-potato/tree/master/samples" target="_blank">source and its readme</a>
 and see them <a href="samples/" target="_blank">in action</a>!
 
 Since Couch Potato component definitions run outside of the Angular context,

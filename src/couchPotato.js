@@ -1,5 +1,5 @@
 /* angular-couch-potato
- * https://github.com/stu-salsbury/angular-couch-potato
+ * https://github.com/laurelnaiad/angular-couch-potato
  * Copyright (c) 2013 Stuart Salsbury
  *  Based on https://github.com/szhanginrhythm/angular-require-lazyload
  * Licensed MIT

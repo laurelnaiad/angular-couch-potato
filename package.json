@@ -1,20 +1,20 @@
 {
   "name": "angular-couch-potato",
   "description": "Provider/Service to Lazy-Load Components in AngularJS Applications",
-  "version": "0.2.1",
-  "homepage": "https://github.com/stu-salsbury/angular-couch-potato",
+  "version": "0.2.2",
+  "homepage": "https://github.com/laurelnaiad/angular-couch-potato",
   "author": {
-    "name": "Stu Salsbury",
-    "url": "https://github.com/stu-salsbury"
+    "name": "Daphne Maddox",
+    "url": "https://github.com/laurelnaiad"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/stu-salsbury/angular-couch-potato.git"
+    "url": "https://github.com/laurelnaiad/angular-couch-potato.git"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/stu-salsbury/angular-couch-potato/blob/master/LICENSE"
+      "url": "https://github.com/laurelnaiad/angular-couch-potato/blob/master/LICENSE"
     }
   ],
   "dependencies": {},

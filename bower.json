@@ -1,13 +1,13 @@
 {
   "name": "angular-couch-potato",
-  "version": "0.1.1",
+  "version": "0.2.2",
   "main": [
     "dist/angular-couch-potato.js"
   ],
   "description": "Provider/Service to Lazy-Load Components in AngularJS Applications",
   "repository": {
     "type": "git",
-    "url": "git://github.com/stu-salsbury/angular-couch-potato.git"
+    "url": "git://github.com/laurelnaiad/angular-couch-potato.git"
   },
   "ignore": [
     "dist/docs",
