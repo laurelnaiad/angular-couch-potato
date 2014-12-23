@@ -1,4 +1,4 @@
-/*! angular-couch-potato - v0.2.2 - 2014-11-06
+/*! angular-couch-potato - v0.2.3 - 2014-11-06
  * https://github.com/laurelnaiad/angular-couch-potato
  * Copyright (c) 2013 Daphne Maddox;
  *    Uses software code originally found at https://github.com/szhanginrhythm/angular-require-lazyload

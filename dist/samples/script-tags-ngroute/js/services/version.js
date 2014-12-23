@@ -1,3 +1,3 @@
 define([], function () {
-  app.registerValue('version', '0.2.2');
+  app.registerValue('version', '0.2.3');
 });

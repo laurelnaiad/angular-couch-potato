@@ -1,7 +1,7 @@
 {
   "name": "angular-couch-potato",
   "description": "Provider/Service to Lazy-Load Components in AngularJS Applications",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "homepage": "https://github.com/laurelnaiad/angular-couch-potato",
   "author": {
     "name": "Daphne Maddox",

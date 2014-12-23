@@ -1,6 +1,7 @@
 {
   "name": "angular-couch-potato",
-  "version": "0.2.2",
+  "version": "0.2.3",
+  "homepage": "https://github.com/laurelnaiad/angular-couch-potato",
   "main": [
     "dist/angular-couch-potato.js"
   ],
