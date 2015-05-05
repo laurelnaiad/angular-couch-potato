@@ -30,6 +30,10 @@ and the api is nothing change!
 
 ### dependencies
 jQuery  -> use $.ajax
+
+
 async  -> use async.parallel
+
+
 
 
