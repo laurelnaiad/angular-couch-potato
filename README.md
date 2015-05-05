@@ -26,3 +26,10 @@ See the [Issues List](https://github.com/laurelnaiad/ng-couch-potato/issues).  Y
 ### New Change for forfun(s)
 
 use jQuery.js not require.js,and cache (if u lazy load a module include directive , will execute script many times ,finally some error show up , when I cache the script,so wont load again and wont execute a again)
+and the api is nothing change!
+
+### dependencies
+jQuery  -> use $.ajax
+async  -> use async.parallel
+
+
