@@ -22,3 +22,7 @@ See the [LICENSE file](https://github.com/laurelnaiad/ng-couch-potato/blob/maste
 #### Questions/Comments/Concerns
 
 See the [Issues List](https://github.com/laurelnaiad/ng-couch-potato/issues).  Yes, couch-potato really is just small a page of code **before** minimization.  Short and sweet.  It's about the pattern...
+
+### New Change for forfun(s)
+
+use jQuery.js not require.js,and cache (if u lazy load a module include directive , will execute script many times ,finally some error show up , when I cache the script,so wont load again and wont execute a again)
