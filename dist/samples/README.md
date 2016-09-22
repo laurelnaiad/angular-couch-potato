@@ -4,4 +4,4 @@ To run the samples:
 * ```cd angular-couch-potato```
 * ```npm install```
 * ```node server.js```
-* visit [http://localhost:3000/angular-couch-potato/samples/](http://localhost:3006/angular-couch-potato/samples/)
+* visit [http://localhost:3000/angular-couch-potato/samples/](http://localhost:3000/angular-couch-potato/samples/)

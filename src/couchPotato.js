@@ -79,6 +79,7 @@
     ) {
 
       var rootScope = null;
+      var compileProviderComponentWithContext = null;
 
       //Expose each provider's functionality as single-argument functions.
       //The component-definining functions that are passed as parameters
@@ -124,6 +125,16 @@
 
       function registerDirective(directive, apply) {
         $compileProvider.directive.apply(null, directive);
+        if (apply) {
+          rootScope.$apply();
+        }
+      }
+
+      function registerComponent(component, apply) {
+        if (compileProviderComponentWithContext === null) {
+          compileProviderComponentWithContext = $compileProvider.component.bind($compileProvider);
+        }
+        compileProviderComponentWithContext.apply(null, component);
         if (apply) {
           rootScope.$apply();
         }
@@ -244,6 +255,7 @@
         svc.registerService = registerService;
         svc.registerFilter = registerFilter;
         svc.registerDirective = registerDirective;
+        svc.registerComponent = registerComponent;
         svc.registerController = registerController;
         svc.registerDecorator = registerDecorator;
         svc.registerProvider = registerProvider;
@@ -339,6 +351,16 @@
         }
         else {
           app.directive(name, directive);
+        }
+        return app;
+      };
+
+      app.registerComponent = function(name, component) {
+        if (app.lazy) {
+          app.lazy.registerComponent([name, component]);
+        }
+        else {
+          app.component(name, component);
         }
         return app;
       };
