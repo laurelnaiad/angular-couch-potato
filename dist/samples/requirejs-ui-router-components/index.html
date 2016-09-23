@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <base href="/angular-couch-potato/samples/requirejs-ui-router-components/"/>
+    <title ng-bind="$state.current.name + ' - Couch Potato with RequireJS/ui-router'">Couch Potato, ui-router and Angular 1.5.x components</title>
+  </head>
+  <body ng-cloak>
+    <h1>Sample using RequireJS, angular-ui-router and angular 1.5.x components</h1>
+
+    <p><a ui-sref="home">Home</a></p>
+    <p><a ui-sref="about">About</a></p>
+
+    <div ng-cloak ui-view></div>
+
+    <hr ng-cloak>
+    <pre ng-cloak>
+      <!-- Here's some values to keep an eye on in the sample in order to understand $state and $stateParams -->
+      $state = {{$state.current.name}}
+      $stateParams = {{$stateParams}}
+      $state full url = {{ $state.$current.url.source }}
+      <!-- $state.$current is not a public api, we are using it to
+           display the full url for learning purposes-->
+    </pre>
+
+    <script src="../../dependencies/require.js"></script>
+    <script>
+require.config({
+
+  baseUrl: 'app',
+
+  paths: {
+
+    'angular'               : '../../../dependencies/angular',
+    'angular-ui-router'     : '../../../dependencies/release/angular-ui-router',
+    'angular-couch-potato'  : '../../../angular-couch-potato',
+    'views'                 : '../views'
+
+  },
+
+  shim: {
+
+    'angular': {
+      exports   : 'angular'
+    },
+
+    'angular-ui-router': {
+      deps      : ['angular']
+    }
+
+  }
+
+});
+
+// run is required to force the app to run, not because we need to interact
+// with it.  Anything required here will by default be combined/minified by
+// r.js if you use it.
+require(['app', 'angular', 'app-init'], function(app, angular) {
+
+  angular.element(document).ready(function() {
+
+    angular.bootstrap(document, [app['name'], function() {
+
+      // for good measure, put ng-app on the html element
+      // studiously avoiding jQuery because angularjs.org says we shouldn't
+      // use it.  In real life, there are a ton of reasons to use it.
+      // karma likes to have ng-app on the html element when using requirejs.
+      angular.element(document).find('html').addClass('ng-app');
+
+    }]);
+
+  });
+
+});
+    </script>
+
+  </body>
+</html>

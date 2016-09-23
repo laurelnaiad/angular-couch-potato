@@ -1,6 +1,6 @@
 {
   "name": "angular-couch-potato",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "homepage": "https://github.com/laurelnaiad/angular-couch-potato",
   "main": [
     "dist/angular-couch-potato.js"
@@ -19,12 +19,11 @@
     "./*.gitignore",
     "package.json"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "requirejs": "~2.1.8",
-    "angular-ui-router": "~0.2.0",
-    "angular": "~1.2.0",
-    "angular-route": "~1.2.0"
+    "requirejs": "^2.3.2",
+    "angular-ui-router": "^0.3.1",
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8"
   }
 }
